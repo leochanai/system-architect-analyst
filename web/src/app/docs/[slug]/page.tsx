@@ -4,7 +4,9 @@ import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { MarkdownContent } from "@/components/markdown-content"
 import { NotesPanel } from "@/components/notes-panel"
+import { LinksPanel } from "@/components/links-panel"
 import Link from "next/link"
+import { Link2 } from "lucide-react"
 
 interface PageProps {
   params: Promise<{
@@ -80,62 +82,83 @@ export default async function DocPage({ params }: PageProps) {
       {/* 笔记面板 */}
       <NotesPanel docSlug={slug} />
       
-      <div className="max-w-4xl">
-      <div className="mb-6">
-        <p className="text-sm text-muted-foreground mb-2">{docInfo.chapter}</p>
-        <h1 className="text-3xl font-bold tracking-tight">{docInfo.title}</h1>
-        {docContent?.metadata && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {docContent.metadata.tags?.map((tag: string) => (
-              <span key={tag} className="px-2 py-1 bg-muted rounded text-sm">
-                {tag}
-              </span>
-            ))}
-            {docContent.metadata.star && (
-              <span className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 rounded text-sm">
-                {docContent.metadata.star}
-              </span>
+      {/* 主要布局：左侧内容 + 右侧链接 */}
+      <div className="flex gap-6">
+        {/* 左侧：文档内容 */}
+        <div className="flex-1 min-w-0">
+          <div className="mb-6">
+            <p className="text-sm text-muted-foreground mb-2">{docInfo.chapter}</p>
+            <h1 className="text-3xl font-bold tracking-tight">{docInfo.title}</h1>
+            {docContent?.metadata && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {docContent.metadata.tags?.map((tag: string) => (
+                  <span key={tag} className="px-2 py-1 bg-muted rounded text-sm">
+                    {tag}
+                  </span>
+                ))}
+                {docContent.metadata.star && (
+                  <span className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 rounded text-sm">
+                    {docContent.metadata.star}
+                  </span>
+                )}
+              </div>
             )}
           </div>
-        )}
-      </div>
-      
-      <div className="">
-        {docContent ? (
-          <MarkdownContent content={docContent.content} />
-        ) : (
-          <div className="rounded-lg bg-muted p-8 text-center">
-            <p className="text-lg text-muted-foreground mb-4">
-              📚 此章节内容正在准备中...
-            </p>
-            <p className="text-sm text-muted-foreground">
-              无法找到对应的 Markdown 文件
-            </p>
+          
+          <div className="">
+            {docContent ? (
+              <MarkdownContent content={docContent.content} />
+            ) : (
+              <div className="rounded-lg bg-muted p-8 text-center">
+                <p className="text-lg text-muted-foreground mb-4">
+                  📚 此章节内容正在准备中...
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  无法找到对应的 Markdown 文件
+                </p>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      
-      {/* 导航按钮 */}
-      <div className="flex justify-between mt-12 pt-6 border-t">
-        <div>
-          {prev && (
-            <Link href={prev.href}>
-              <Button variant="outline">
-                ← {prev.title}
-              </Button>
-            </Link>
-          )}
+          
+          {/* 导航按钮 */}
+          <div className="flex justify-between mt-12 pt-6 border-t">
+            <div>
+              {prev && (
+                <Link href={prev.href}>
+                  <Button variant="outline">
+                    ← {prev.title}
+                  </Button>
+                </Link>
+              )}
+            </div>
+            <div>
+              {next && (
+                <Link href={next.href}>
+                  <Button variant="outline">
+                    {next.title} →
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </div>
         </div>
-        <div>
-          {next && (
-            <Link href={next.href}>
-              <Button variant="outline">
-                {next.title} →
-              </Button>
-            </Link>
-          )}
+        
+        {/* 右侧：链接面板（固定宽度） */}
+        <div className="w-80 flex-shrink-0">
+          <div className="sticky top-6 h-[calc(100vh-3rem)]">
+            <div className="h-full flex flex-col rounded-xl border bg-card/50 backdrop-blur-sm shadow-sm">
+              {/* 面板头部 */}
+              <div className="flex items-center gap-2 px-5 py-4 border-b">
+                <Link2 className="h-4 w-4 text-primary" />
+                <h2 className="text-sm font-semibold">章节链接</h2>
+              </div>
+              {/* 可滚动的内容区域 */}
+              <div className="flex-1 overflow-y-auto px-5 py-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground/20 hover:scrollbar-thumb-muted-foreground/30">
+                <LinksPanel docSlug={slug} docTitle={docInfo.title} />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
     </>
   )
