@@ -23,9 +23,9 @@ export function Logo() {
       </div>
       <div className="flex flex-col">
         <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-         系统架构设计师
+          系统架构设计师
         </span>
-        <span className="text-xs text-muted-foreground">软考学习平台 v1.0</span>
+        <span className="text-xs text-muted-foreground">学习平台 v1.0</span>
       </div>
     </Link>
   )

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -31,15 +31,14 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
           // 处理图片路径
           const imageSrc = src.startsWith('/') ? src : `/${src}`
           
+          // 使用 img 标签而不是 div 包装，避免嵌套错误
           return (
-            <div className="my-4 relative w-full">
-              <img
-                src={imageSrc}
-                alt={alt || ''}
-                className="w-full h-auto rounded-lg shadow-md"
-                loading="lazy"
-              />
-            </div>
+            <img
+              src={imageSrc}
+              alt={alt || ''}
+              className="my-4 w-full h-auto rounded-lg shadow-md block"
+              loading="lazy"
+            />
           )
         },
         h1: ({ children }) => (
@@ -51,9 +50,20 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
         h3: ({ children }) => (
           <h3 className="text-xl font-medium mt-4 mb-2">{children}</h3>
         ),
-        p: ({ children }) => (
-          <p className="mb-4 leading-relaxed">{children}</p>
-        ),
+        p: ({ children }) => {
+          // 检查是否包含图片，如果包含则使用 div 而不是 p
+          const hasImage = Array.isArray(children) && 
+            children.some(child => 
+              React.isValidElement(child) && 
+              child.type === 'img'
+            )
+          
+          if (hasImage) {
+            return <div className="mb-4 leading-relaxed">{children}</div>
+          }
+          
+          return <p className="mb-4 leading-relaxed">{children}</p>
+        },
         ul: ({ children }) => (
           <ul className="list-disc list-inside mb-4 space-y-2">{children}</ul>
         ),

@@ -67,7 +67,7 @@ export function SidebarNav() {
       {/* Footer */}
       <div className="border-t p-4">
         <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <span>© 2024 架构师考试</span>
+          <span>© 2025 架构师考试</span>
           <span>v1.0.0</span>
         </div>
       </div>
