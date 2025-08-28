@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BookOpen, Target, PenTool, Trophy, ArrowRight, Sparkles } from "lucide-react";
+import { BookOpen, Target, PenTool, Trophy, ArrowRight, Sparkles, StickyNote } from "lucide-react";
 
 export default function Home() {
   return (
@@ -23,7 +23,7 @@ export default function Home() {
             全面覆盖15个章节知识点，结合历年真题分析和案例特训，
             帮助您系统地准备系统架构设计师考试。
           </p>
-          <div className="mt-6 flex items-center gap-4">
+          <div className="mt-6 flex flex-wrap items-center gap-4">
             <Link href="/docs/1-1">
               <Button size="lg" className="gap-2">
                 开始学习
@@ -33,6 +33,12 @@ export default function Home() {
             <Link href="/docs/14-1">
               <Button variant="outline" size="lg">
                 查看考纲
+              </Button>
+            </Link>
+            <Link href="/notes">
+              <Button variant="outline" size="lg" className="gap-2">
+                <StickyNote className="h-4 w-4" />
+                我的笔记
               </Button>
             </Link>
           </div>

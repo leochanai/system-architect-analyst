@@ -3,6 +3,7 @@ import { getDocContent } from "@/lib/markdown"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { MarkdownContent } from "@/components/markdown-content"
+import { NotesPanel } from "@/components/notes-panel"
 import Link from "next/link"
 
 interface PageProps {
@@ -75,7 +76,11 @@ export default async function DocPage({ params }: PageProps) {
   const { prev, next } = getAdjacentDocs(slug)
   
   return (
-    <div className="max-w-4xl">
+    <>
+      {/* 笔记面板 */}
+      <NotesPanel docSlug={slug} />
+      
+      <div className="max-w-4xl">
       <div className="mb-6">
         <p className="text-sm text-muted-foreground mb-2">{docInfo.chapter}</p>
         <h1 className="text-3xl font-bold tracking-tight">{docInfo.title}</h1>
@@ -131,6 +136,7 @@ export default async function DocPage({ params }: PageProps) {
           )}
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }
