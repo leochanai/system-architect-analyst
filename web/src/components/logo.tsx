@@ -22,7 +22,7 @@ export function Logo() {
         <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-background"></div>
       </div>
       <div className="flex flex-col">
-        <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <span className="text-lg font-bold text-foreground">
          系统架构设计师
         </span>
         <span className="text-xs text-muted-foreground">软考学习平台 v1.0</span>

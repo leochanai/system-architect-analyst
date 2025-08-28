@@ -3,7 +3,7 @@ import { getDocContent } from "@/lib/markdown"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { MarkdownContent } from "@/components/markdown-content"
-import { NotesPanel } from "@/components/notes-panel"
+// import { NotesPanel } from "@/components/notes-panel"  // 隐藏笔记功能
 import { LinksPanel } from "@/components/links-panel"
 import Link from "next/link"
 import { Link2 } from "lucide-react"
@@ -79,8 +79,8 @@ export default async function DocPage({ params }: PageProps) {
   
   return (
     <>
-      {/* 笔记面板 */}
-      <NotesPanel docSlug={slug} />
+      {/* 笔记面板 - 已隐藏 */}
+      {/* <NotesPanel docSlug={slug} /> */}
       
       {/* 主要布局：左侧内容 + 右侧链接 */}
       <div className="flex gap-6">

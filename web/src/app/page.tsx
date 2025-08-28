@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BookOpen, Target, PenTool, Trophy, ArrowRight, Sparkles, StickyNote } from "lucide-react";
+import { BookOpen, Target, PenTool, Trophy, ArrowRight, Sparkles } from "lucide-react";
 
 export default function Home() {
   return (
@@ -33,12 +33,6 @@ export default function Home() {
             <Link href="/docs/14-1">
               <Button variant="outline" size="lg">
                 查看考纲
-              </Button>
-            </Link>
-            <Link href="/notes">
-              <Button variant="outline" size="lg" className="gap-2">
-                <StickyNote className="h-4 w-4" />
-                我的笔记
               </Button>
             </Link>
           </div>
