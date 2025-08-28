@@ -11,16 +11,29 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { navigation } from "@/lib/navigation"
+import { Logo } from "@/components/logo"
+import { Search } from "@/components/search"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export function SidebarNav() {
   const pathname = usePathname()
 
   return (
-    <ScrollArea className="h-full py-6 px-4">
-      <div className="space-y-1">
-        <h2 className="mb-4 px-2 text-lg font-semibold tracking-tight">
-          系统架构设计师考试学习指南
-        </h2>
+    <div className="flex h-full flex-col">
+      {/* Header */}
+      <div className="border-b px-4 py-4">
+        <Logo />
+        <div className="mt-4 flex items-center gap-2">
+          <div className="flex-1">
+            <Search />
+          </div>
+          <ThemeToggle />
+        </div>
+      </div>
+      
+      {/* Navigation */}
+      <ScrollArea className="flex-1 px-4 py-4">
+        <div className="space-y-1">
         <Accordion type="multiple" className="w-full">
           {navigation.map((chapter, index) => (
             <AccordionItem key={index} value={`item-${index}`}>
@@ -48,7 +61,16 @@ export function SidebarNav() {
             </AccordionItem>
           ))}
         </Accordion>
+        </div>
+      </ScrollArea>
+      
+      {/* Footer */}
+      <div className="border-t p-4">
+        <div className="flex items-center justify-between text-xs text-muted-foreground">
+          <span>© 2024 架构师考试</span>
+          <span>v1.0.0</span>
+        </div>
       </div>
-    </ScrollArea>
+    </div>
   )
 }
