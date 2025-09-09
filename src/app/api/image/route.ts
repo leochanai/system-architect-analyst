@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   const decodedName = decodeURIComponent(imageName)
   
   // 构建图片路径
-  const imagesDir = path.join(process.cwd(), '..', 'images')
+  const imagesDir = path.join(process.cwd(), 'images')
   
   // 搜索匹配的图片文件
   try {

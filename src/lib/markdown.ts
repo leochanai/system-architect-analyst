@@ -16,7 +16,7 @@ export function processObsidianImages(content: string): string {
 
 // 获取 MD 文件内容
 export async function getDocContent(slug: string) {
-  const docsDir = path.join(process.cwd(), '..', 'docs')
+  const docsDir = path.join(process.cwd(), 'docs')
   
   // 将 slug 转换为文件路径
   // 例如: "1-1" -> "第 1 章 考试介绍及备考攻略/1.1 架构师考试的相关情况.md"
