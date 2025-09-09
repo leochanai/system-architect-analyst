@@ -28,8 +28,10 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
         img: ({ src, alt }) => {
           if (!src) return null
           
-          // 处理图片路径
-          const imageSrc = src.startsWith('/') ? src : `/${src}`
+          // 处理图片路径并加上 basePath
+          const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+          const normalizedSrc = src.startsWith('/') ? src : `/${src}`
+          const imageSrc = `${basePath}${normalizedSrc}`
           
           // 使用 img 标签而不是 div 包装，避免嵌套错误
           return (
