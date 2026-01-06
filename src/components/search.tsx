@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
-import { Search as SearchIcon, X } from "lucide-react"
+import { Search as SearchIcon, X, Command } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { navigation } from "@/lib/navigation"
 
@@ -36,7 +36,7 @@ export function Search() {
       })
     })
 
-    setResults(searchResults.slice(0, 10)) // 限制显示10个结果
+    setResults(searchResults.slice(0, 10))
   }, [])
 
   useEffect(() => {
@@ -45,12 +45,10 @@ export function Search() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Cmd/Ctrl + K 打开搜索
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault()
         setIsOpen(true)
       }
-      // ESC 关闭搜索
       if (e.key === "Escape") {
         setIsOpen(false)
       }
@@ -70,67 +68,83 @@ export function Search() {
     <>
       <Button
         variant="outline"
-        className="relative w-full justify-start text-sm text-muted-foreground"
+        className="relative w-full justify-start text-sm text-muted-foreground border-border hover:border-primary/50 hover:text-foreground transition-colors"
         onClick={() => setIsOpen(true)}
       >
         <SearchIcon className="mr-2 h-4 w-4" />
-        <span>搜索文档...</span>
-        <kbd className="pointer-events-none absolute right-2 top-2.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-          <span className="text-xs">⌘</span>K
+        <span className="font-mono text-xs">SEARCH</span>
+        <kbd className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 hidden h-5 select-none items-center gap-0.5 border border-border px-1.5 font-mono text-[10px] text-muted-foreground sm:flex">
+          <Command className="h-2.5 w-2.5" />K
         </kbd>
       </Button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50" onClick={() => setIsOpen(false)}>
+        <div
+          className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm animate-fade-in"
+          onClick={() => setIsOpen(false)}
+        >
           <div
             className="fixed left-[50%] top-[20%] z-50 w-full max-w-2xl translate-x-[-50%] p-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="rounded-lg border bg-background shadow-lg">
-              <div className="flex items-center border-b px-4 py-3">
-                <SearchIcon className="mr-3 h-5 w-5 text-muted-foreground" />
+            <div className="blueprint-border bg-card shadow-2xl animate-slide-up">
+              {/* 搜索输入 */}
+              <div className="flex items-center border-b border-border px-4 py-3">
+                <SearchIcon className="mr-3 h-5 w-5 text-primary" />
                 <input
                   type="text"
                   placeholder="搜索章节或文档..."
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
+                  className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground font-mono text-sm"
                   autoFocus
                 />
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8"
+                  className="h-8 w-8 text-muted-foreground hover:text-foreground"
                   onClick={() => setIsOpen(false)}
                 >
                   <X className="h-4 w-4" />
                 </Button>
               </div>
-              
+
+              {/* 搜索结果 */}
               {results.length > 0 && (
                 <div className="max-h-[400px] overflow-y-auto p-2">
                   {results.map((result, index) => (
                     <button
                       key={index}
-                      className="w-full rounded-md px-3 py-2 text-left hover:bg-accent hover:text-accent-foreground"
+                      className="w-full px-4 py-3 text-left hover:bg-accent/10 transition-colors group flex items-start gap-3"
                       onClick={() => handleSelect(result.href)}
                     >
-                      <div className="font-medium">{result.title}</div>
-                      <div className="text-xs text-muted-foreground">{result.chapter}</div>
+                      <span className="font-mono text-xs text-primary opacity-50 pt-0.5 w-5">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <div>
+                        <div className="font-medium text-foreground group-hover:text-primary transition-colors">
+                          {result.title}
+                        </div>
+                        <div className="font-mono text-xs text-muted-foreground mt-0.5">
+                          {result.chapter}
+                        </div>
+                      </div>
                     </button>
                   ))}
                 </div>
               )}
-              
+
+              {/* 无结果 */}
               {query && results.length === 0 && (
-                <div className="p-4 text-center text-sm text-muted-foreground">
-                  没有找到相关内容
+                <div className="p-8 text-center">
+                  <p className="text-muted-foreground text-sm">没有找到相关内容</p>
                 </div>
               )}
-              
+
+              {/* 空状态 */}
               {!query && (
-                <div className="p-4 text-center text-sm text-muted-foreground">
-                  输入关键词开始搜索
+                <div className="p-8 text-center">
+                  <p className="text-muted-foreground text-sm font-mono">INPUT KEYWORDS TO SEARCH</p>
                 </div>
               )}
             </div>

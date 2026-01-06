@@ -1,31 +1,26 @@
 import Link from "next/link"
+import { Layers } from "lucide-react"
 
 export function Logo() {
   return (
-    <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+    <Link href="/" className="flex items-center gap-3 group">
+      {/* Logo 图标 - 几何线条风格 */}
       <div className="relative">
-        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
-          <svg
-            className="w-6 h-6 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
-            />
-          </svg>
+        <div className="w-10 h-10 border-2 border-primary flex items-center justify-center">
+          <Layers className="w-5 h-5 text-primary" />
         </div>
-        <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-background"></div>
+        {/* 角落装饰 */}
+        <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 border-r border-b border-primary"></div>
       </div>
+
+      {/* 文字 */}
       <div className="flex flex-col">
-        <span className="text-lg font-bold text-foreground">
-         系统架构设计师
+        <span className="text-base font-bold text-foreground tracking-tight leading-tight group-hover:text-primary transition-colors">
+          系统架构设计师
         </span>
-        <span className="text-xs text-muted-foreground">软考学习平台 v1.0</span>
+        <span className="font-mono text-[10px] text-muted-foreground tracking-wider uppercase">
+          System Architect
+        </span>
       </div>
     </Link>
   )

@@ -1,167 +1,191 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BookOpen, Target, PenTool, Trophy, ArrowRight, Sparkles } from "lucide-react";
+import { BookOpen, Target, PenTool, Trophy, ArrowRight, Layers } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 p-8 md:p-12">
-        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 blur-3xl" />
-        <div className="relative">
-          <div className="flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 mb-4">
-            <Sparkles className="h-4 w-4" />
-            <span>系统化学习 · 高效备考</span>
+    <div className="animate-fade-in">
+      {/* Hero Section - 蓝图美学 */}
+      <section className="relative mb-16">
+        {/* 章节编号装饰 */}
+        <div className="chapter-number">00</div>
+
+        {/* 主标题区 */}
+        <div className="relative pt-8">
+          {/* 顶部标签 */}
+          <div className="flex items-center gap-3 mb-6">
+            <span className="tag">SYSTEM ARCHITECT</span>
+            <span className="text-muted-foreground text-sm font-mono">v2026</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-br from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
+
+          {/* 主标题 */}
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-tight mb-4 animate-slide-in-left">
             系统架构设计师
-            <br />
-            <span className="text-3xl md:text-4xl">软考学习平台</span>
           </h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
-            全面覆盖15个章节知识点，结合历年真题分析和案例特训，
-            帮助您系统地准备系统架构设计师考试。
+          <p className="text-2xl md:text-3xl text-muted-foreground font-light mb-6">
+            软考学习平台
           </p>
-          <div className="mt-6 flex flex-wrap items-center gap-4">
+
+          {/* 描述 */}
+          <p className="text-lg text-muted-foreground max-w-2xl mb-8 leading-relaxed">
+            全面覆盖 <span className="text-primary font-mono">15</span> 个章节知识点，
+            结合历年真题分析和案例特训，帮助您系统地准备系统架构设计师考试。
+          </p>
+
+          {/* CTA 按钮 */}
+          <div className="flex flex-wrap items-center gap-4">
             <Link href="/docs/1-1">
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2 btn-press">
                 开始学习
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
             <Link href="/docs/14-1">
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" className="btn-press">
                 查看考纲
               </Button>
             </Link>
           </div>
         </div>
-      </div>
 
-      {/* Feature Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Link href="/docs/1-1" className="group">
-          <div className="relative overflow-hidden rounded-xl border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-            <div className="absolute right-0 top-0 h-24 w-24 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-            <div className="relative">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 mb-4">
-                <BookOpen className="h-6 w-6" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">学习资料</h3>
-              <p className="text-muted-foreground mb-4">
-                15个章节的完整学习内容，涵盖考试所有知识点
-              </p>
-              <div className="flex items-center text-sm font-medium text-blue-600 dark:text-blue-400">
-                开始学习
-                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+        {/* 装饰分隔线 */}
+        <div className="mt-12 flex items-center gap-4">
+          <div className="h-px flex-1 bg-border"></div>
+          <Layers className="h-4 w-4 text-primary opacity-50" />
+          <div className="h-px flex-1 bg-border"></div>
+        </div>
+      </section>
+
+      {/* Feature Cards - 功能模块 */}
+      <section className="mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-container">
+          {/* 学习资料卡片 */}
+          <Link href="/docs/1-1" className="group">
+            <div className="relative blueprint-border bg-card p-6 card-hover">
+              <div className="diagonal-accent"></div>
+              <div className="relative">
+                {/* 图标 */}
+                <div className="inline-flex h-12 w-12 items-center justify-center border border-primary/30 text-primary mb-4">
+                  <BookOpen className="h-5 w-5" />
+                </div>
+                {/* 编号 */}
+                <span className="absolute top-0 right-0 font-mono text-xs text-muted-foreground opacity-50">01</span>
+                {/* 标题 */}
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                  学习资料
+                </h3>
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                  15 个章节的完整学习内容，涵盖考试所有知识点
+                </p>
+                {/* 链接 */}
+                <div className="flex items-center text-sm font-medium text-primary">
+                  <span className="font-mono">START</span>
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
               </div>
             </div>
-          </div>
-        </Link>
+          </Link>
 
-        <Link href="/docs/1-1" className="group">
-          <div className="relative overflow-hidden rounded-xl border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-            <div className="absolute right-0 top-0 h-24 w-24 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-            <div className="relative">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 mb-4">
-                <Target className="h-6 w-6" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">考试指南</h3>
-              <p className="text-muted-foreground mb-4">
-                了解考试形式、备考策略和答题技巧
-              </p>
-              <div className="flex items-center text-sm font-medium text-purple-600 dark:text-purple-400">
-                查看指南
-                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          {/* 考试指南卡片 */}
+          <Link href="/docs/1-1" className="group">
+            <div className="relative blueprint-border bg-card p-6 card-hover">
+              <div className="diagonal-accent"></div>
+              <div className="relative">
+                <div className="inline-flex h-12 w-12 items-center justify-center border border-primary/30 text-primary mb-4">
+                  <Target className="h-5 w-5" />
+                </div>
+                <span className="absolute top-0 right-0 font-mono text-xs text-muted-foreground opacity-50">02</span>
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                  考试指南
+                </h3>
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                  了解考试形式、备考策略和答题技巧
+                </p>
+                <div className="flex items-center text-sm font-medium text-primary">
+                  <span className="font-mono">VIEW</span>
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
               </div>
             </div>
-          </div>
-        </Link>
+          </Link>
 
-        <Link href="/docs/14-1" className="group">
-          <div className="relative overflow-hidden rounded-xl border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-            <div className="absolute right-0 top-0 h-24 w-24 bg-gradient-to-br from-green-500/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-            <div className="relative">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-green-500/10 text-green-600 dark:text-green-400 mb-4">
-                <Trophy className="h-6 w-6" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">案例分析</h3>
-              <p className="text-muted-foreground mb-4">
-                历年真题分析与解答技巧专题训练
-              </p>
-              <div className="flex items-center text-sm font-medium text-green-600 dark:text-green-400">
-                案例特训
-                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          {/* 案例分析卡片 */}
+          <Link href="/docs/14-1" className="group">
+            <div className="relative blueprint-border bg-card p-6 card-hover">
+              <div className="diagonal-accent"></div>
+              <div className="relative">
+                <div className="inline-flex h-12 w-12 items-center justify-center border border-primary/30 text-primary mb-4">
+                  <Trophy className="h-5 w-5" />
+                </div>
+                <span className="absolute top-0 right-0 font-mono text-xs text-muted-foreground opacity-50">03</span>
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                  案例分析
+                </h3>
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                  历年真题分析与解答技巧专题训练
+                </p>
+                <div className="flex items-center text-sm font-medium text-primary">
+                  <span className="font-mono">PRACTICE</span>
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
               </div>
             </div>
-          </div>
-        </Link>
+          </Link>
 
-        <Link href="/docs/15-1" className="group">
-          <div className="relative overflow-hidden rounded-xl border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-            <div className="absolute right-0 top-0 h-24 w-24 bg-gradient-to-br from-orange-500/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-            <div className="relative">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 mb-4">
-                <PenTool className="h-6 w-6" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">论文写作</h3>
-              <p className="text-muted-foreground mb-4">
-                论文写作技巧与高分范文解析
-              </p>
-              <div className="flex items-center text-sm font-medium text-orange-600 dark:text-orange-400">
-                论文技巧
-                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          {/* 论文写作卡片 */}
+          <Link href="/docs/15-1" className="group">
+            <div className="relative blueprint-border bg-card p-6 card-hover">
+              <div className="diagonal-accent"></div>
+              <div className="relative">
+                <div className="inline-flex h-12 w-12 items-center justify-center border border-primary/30 text-primary mb-4">
+                  <PenTool className="h-5 w-5" />
+                </div>
+                <span className="absolute top-0 right-0 font-mono text-xs text-muted-foreground opacity-50">04</span>
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                  论文写作
+                </h3>
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                  论文写作技巧与高分范文解析
+                </p>
+                <div className="flex items-center text-sm font-medium text-primary">
+                  <span className="font-mono">LEARN</span>
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
               </div>
             </div>
-          </div>
-        </Link>
-      </div>
+          </Link>
+        </div>
+      </section>
 
-      {/* Study Tips */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-muted to-muted/50 p-8">
-        <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br from-yellow-500/10 to-transparent blur-3xl" />
-        <div className="relative">
-          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-yellow-500 animate-pulse" />
+      {/* Study Tips Section - 学习建议 */}
+      <section className="relative">
+        <div className="chapter-number" style={{ opacity: 0.02 }}>TIP</div>
+
+        <div className="blueprint-border bg-card p-8">
+          <h2 className="text-xl font-semibold mb-6 flex items-center gap-3">
+            <span className="inline-block w-2 h-2 bg-primary animate-pulse"></span>
             学习建议
           </h2>
-          <div className="grid gap-3">
-            <div className="flex items-start gap-3">
-              <div className="mt-1 h-5 w-5 rounded-full bg-blue-500/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-xs font-bold text-blue-600 dark:text-blue-400">1</span>
+
+          <div className="grid gap-4 stagger-container">
+            {[
+              { num: "01", text: "建议按照章节顺序系统学习，每天保持 2-3 小时的学习时间" },
+              { num: "02", text: "重点关注第5章软件架构设计和第11章数据库系统" },
+              { num: "03", text: "案例分析和论文写作需要大量练习，建议提前准备" },
+              { num: "04", text: "定期复习已学内容，做好笔记总结" },
+            ].map((tip) => (
+              <div key={tip.num} className="flex items-start gap-4 group">
+                <span className="font-mono text-xs text-primary opacity-60 pt-1 w-6 flex-shrink-0">
+                  {tip.num}
+                </span>
+                <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground transition-colors">
+                  {tip.text}
+                </p>
               </div>
-              <p className="text-muted-foreground">
-                建议按照章节顺序系统学习，每天保持2-3小时的学习时间
-              </p>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="mt-1 h-5 w-5 rounded-full bg-purple-500/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-xs font-bold text-purple-600 dark:text-purple-400">2</span>
-              </div>
-              <p className="text-muted-foreground">
-                重点关注第5章软件架构设计和第11章数据库系统
-              </p>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="mt-1 h-5 w-5 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-xs font-bold text-green-600 dark:text-green-400">3</span>
-              </div>
-              <p className="text-muted-foreground">
-                案例分析和论文写作需要大量练习，建议提前准备
-              </p>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="mt-1 h-5 w-5 rounded-full bg-orange-500/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-xs font-bold text-orange-600 dark:text-orange-400">4</span>
-              </div>
-              <p className="text-muted-foreground">
-                定期复习已学内容，做好笔记总结
-              </p>
-            </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
