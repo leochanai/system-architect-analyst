@@ -6,7 +6,7 @@ import matter from 'gray-matter'
 export function processObsidianImages(content: string): string {
   // 匹配 ![[image.jpg]] 格式
   const obsidianImagePattern = /!\[\[(.+?)\]\]/g
-  
+
   return content.replace(obsidianImagePattern, (match, imageName) => {
     // 使用 API 路由来提供图片，避免中文文件名问题
     const imagePath = `/api/image?name=${encodeURIComponent(imageName)}`
@@ -17,7 +17,7 @@ export function processObsidianImages(content: string): string {
 // 获取 MD 文件内容
 export async function getDocContent(slug: string) {
   const docsDir = path.join(process.cwd(), 'docs')
-  
+
   // 将 slug 转换为文件路径
   // 例如: "1-1" -> "第 1 章 考试介绍及备考攻略/1.1 架构师考试的相关情况.md"
   const chapterMap: Record<string, string> = {
@@ -105,23 +105,24 @@ export async function getDocContent(slug: string) {
     '15-1': '第 15 章 论文写作技巧篇/15.1 考试大纲+考情分析.md',
     '15-2': '第 15 章 论文写作技巧篇/15.2 备考策略.md',
     '15-3': '第 15 章 论文写作技巧篇/15.3 论文写作四部曲.md',
-    '15-4': '第 15 章 论文写作技巧篇/15.4 论文写作准则.md'
+    '15-4': '第 15 章 论文写作技巧篇/15.4 论文写作准则.md',
+    '16-1': '第 16 章 其它资源/16.1 练习题资源.md'
   }
-  
+
   const filePath = chapterMap[slug]
   if (!filePath) {
     return null
   }
-  
+
   const fullPath = path.join(docsDir, filePath)
-  
+
   try {
     const fileContent = fs.readFileSync(fullPath, 'utf-8')
     const { data, content } = matter(fileContent)
-    
+
     // 处理 Obsidian 风格的图片链接
     const processedContent = processObsidianImages(content)
-    
+
     return {
       metadata: data,
       content: processedContent

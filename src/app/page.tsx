@@ -28,7 +28,7 @@ export default function Home() {
 
           {/* 描述 */}
           <p className="text-lg text-muted-foreground max-w-2xl mb-8 leading-relaxed">
-            全面覆盖 <span className="text-primary font-mono">15</span> 个章节知识点，
+            全面覆盖 <span className="text-primary font-mono">16</span> 个章节知识点，
             结合历年真题分析和案例特训，帮助您系统地准备系统架构设计师考试。
           </p>
 
@@ -75,7 +75,7 @@ export default function Home() {
                   学习资料
                 </h3>
                 <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                  15 个章节的完整学习内容，涵盖考试所有知识点
+                  16 个章节的完整学习内容，涵盖考试所有知识点
                 </p>
                 {/* 链接 */}
                 <div className="flex items-center text-sm font-medium text-primary">

@@ -164,5 +164,11 @@ export const navigation: NavItem[] = [
       { title: "15.3 论文写作四部曲", href: "/docs/15-3" },
       { title: "15.4 论文写作准则", href: "/docs/15-4" }
     ]
+  },
+  {
+    title: "第 16 章 其它资源",
+    items: [
+      { title: "16.1 练习题资源", href: "/docs/16-1" }
+    ]
   }
 ]
