@@ -32,7 +32,7 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
         remarkPlugins={[remarkGfm]}
         components={{
           img: ({ src, alt }) => {
-            if (!src) return null
+            if (!src || typeof src !== 'string') return null
 
             const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
             const normalizedSrc = src.startsWith('/') ? src : `/${src}`
@@ -93,8 +93,9 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
               {children}
             </blockquote>
           ),
-          code: ({ inline, children }) => {
-            if (inline) {
+          code: ({ children, className }) => {
+            const isInline = !className || !className.includes('language-')
+            if (isInline) {
               return (
                 <code className="bg-muted px-1.5 py-0.5 font-mono text-sm text-primary border border-border">
                   {children}

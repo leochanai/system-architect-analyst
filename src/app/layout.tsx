@@ -7,17 +7,23 @@ import { ReadingProgress } from "@/components/reading-progress";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  fallback: ["system-ui", "sans-serif"],
+  adjustFontFallback: false,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  fallback: ["monospace"],
+  adjustFontFallback: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  fallback: ["monospace"],
+  adjustFontFallback: false,
 });
 
 // Noto Sans SC - 思源黑体，更适合正文和标题阅读
@@ -26,6 +32,8 @@ const notoSansSC = Noto_Sans_SC({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {

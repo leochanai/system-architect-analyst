@@ -62,8 +62,8 @@ export function LinksPanel({ docSlug, docTitle }: LinksPanelProps) {
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null)
   const [description, setDescription] = useState("")
   
-  const outgoingLinks = getOutgoingLinks()
-  const incomingLinks = getIncomingLinks()
+  const outgoingLinks = getOutgoingLinks(docSlug)
+  const incomingLinks = getIncomingLinks(docSlug)
   
   const allDocs = getAllDocs()
   
