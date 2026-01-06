@@ -14,9 +14,23 @@ import { navigation } from "@/lib/navigation"
 import { Logo } from "@/components/logo"
 import { Search } from "@/components/search"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useEffect, useState } from "react"
 
 export function SidebarNav() {
   const pathname = usePathname()
+  const [openItems, setOpenItems] = useState<string[]>([])
+
+  // 根据当前路径自动展开对应的章节
+  useEffect(() => {
+    const currentChapterIndex = navigation.findIndex(chapter =>
+      chapter.items?.some(item => item.href === pathname)
+    )
+
+    if (currentChapterIndex !== -1) {
+      const itemValue = `item-${currentChapterIndex}`
+      setOpenItems(prev => prev.includes(itemValue) ? prev : [...prev, itemValue])
+    }
+  }, [pathname])
 
   // 提取章节编号（如 "第 1 章" -> "01"）
   const getChapterNumber = (title: string, index: number): string => {
@@ -43,7 +57,12 @@ export function SidebarNav() {
       {/* Navigation */}
       <ScrollArea className="flex-1 px-3 py-4">
         <div className="space-y-1 stagger-container">
-          <Accordion type="multiple" className="w-full space-y-1">
+          <Accordion
+            type="multiple"
+            className="w-full space-y-1"
+            value={openItems}
+            onValueChange={setOpenItems}
+          >
             {navigation.map((chapter, index) => (
               <AccordionItem
                 key={index}

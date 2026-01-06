@@ -138,7 +138,7 @@ export default async function DocPage({ params }: PageProps) {
           <Link href={prev.href}>
             <Button
               variant="outline"
-              className="flex flex-col items-center gap-3 px-3 py-4 h-auto w-[60px] btn-press hover:border-primary/50 hover:bg-primary/5 transition-all"
+              className="flex flex-col items-center gap-3 px-3 py-4 h-auto w-[50px] btn-press hover:border-primary/50 hover:bg-primary/5 hover:text-primary transition-all"
             >
               <ArrowUp className="h-5 w-5 flex-shrink-0" />
               <span className="text-xs text-center leading-tight line-clamp-3" style={{ writingMode: 'vertical-rl' }}>{prev.title}</span>
@@ -149,7 +149,7 @@ export default async function DocPage({ params }: PageProps) {
           <Link href={next.href}>
             <Button
               variant="outline"
-              className="flex flex-col items-center gap-3 px-3 py-4 h-auto w-[60px] btn-press hover:border-primary/50 hover:bg-primary/5 transition-all"
+              className="flex flex-col items-center gap-3 px-3 py-4 h-auto w-[50px] btn-press hover:border-primary/50 hover:bg-primary/5 hover:text-primary transition-all"
             >
               <ArrowDown className="h-5 w-5 flex-shrink-0" />
               <span className="text-xs text-center leading-tight line-clamp-3" style={{ writingMode: 'vertical-rl' }}>{next.title}</span>
