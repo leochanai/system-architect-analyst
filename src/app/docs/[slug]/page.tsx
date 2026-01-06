@@ -3,9 +3,8 @@ import { getDocContent } from "@/lib/markdown"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { MarkdownContent } from "@/components/markdown-content"
-import { LinksPanel } from "@/components/links-panel"
 import Link from "next/link"
-import { Link2, ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowUp, ArrowDown } from "lucide-react"
 
 interface PageProps {
   params: Promise<{
@@ -82,100 +81,82 @@ export default async function DocPage({ params }: PageProps) {
 
   return (
     <div className="animate-fade-in">
-      {/* 主要布局：左侧内容 + 右侧链接 */}
-      <div className="flex gap-8">
-        {/* 左侧：文档内容 */}
-        <div className="flex-1 min-w-0">
-          {/* 文档头部 */}
-          <header className="relative mb-8 pb-6 border-b border-border">
-            {/* 章节编号装饰 */}
-            <div className="chapter-number">{docInfo.chapterNum}</div>
+      {/* 文档内容 */}
+      <div className="max-w-4xl mx-auto relative">
+        {/* 文档头部 */}
+        <header className="relative mb-8 pb-6 border-b border-border">
+          {/* 章节编号装饰 */}
+          <div className="chapter-number">{docInfo.chapterNum}</div>
 
-            {/* 章节标签 */}
-            <div className="relative flex items-center gap-3 mb-4">
-              <span className="tag">{docInfo.chapter}</span>
-            </div>
-
-            {/* 标题 */}
-            <h1 className="relative text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-tight">
-              {docInfo.title}
-            </h1>
-
-            {/* 元数据标签 */}
-            {docContent?.metadata && (
-              <div className="mt-4 flex flex-wrap gap-2">
-                {docContent.metadata.tags?.map((tag: string) => (
-                  <span key={tag} className="px-2 py-1 font-mono text-xs border border-border text-muted-foreground">
-                    {tag}
-                  </span>
-                ))}
-                {docContent.metadata.star && (
-                  <span className="px-2 py-1 font-mono text-xs bg-primary/10 text-primary border border-primary/20">
-                    {docContent.metadata.star}
-                  </span>
-                )}
-              </div>
-            )}
-          </header>
-
-          {/* 内容区域 */}
-          <article className="relative">
-            {docContent ? (
-              <MarkdownContent content={docContent.content} />
-            ) : (
-              <div className="blueprint-border p-8 text-center">
-                <p className="text-lg text-muted-foreground mb-2 font-mono">
-                  CONTENT LOADING...
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  无法找到对应的 Markdown 文件
-                </p>
-              </div>
-            )}
-          </article>
-
-          {/* 导航按钮 */}
-          <nav className="flex justify-between mt-12 pt-6 border-t border-border">
-            <div>
-              {prev && (
-                <Link href={prev.href}>
-                  <Button variant="outline" className="gap-2 btn-press hover:border-primary/50">
-                    <ArrowLeft className="h-4 w-4" />
-                    <span className="max-w-[200px] truncate">{prev.title}</span>
-                  </Button>
-                </Link>
-              )}
-            </div>
-            <div>
-              {next && (
-                <Link href={next.href}>
-                  <Button variant="outline" className="gap-2 btn-press hover:border-primary/50">
-                    <span className="max-w-[200px] truncate">{next.title}</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              )}
-            </div>
-          </nav>
-        </div>
-
-        {/* 右侧：链接面板（固定宽度） */}
-        <aside className="w-72 flex-shrink-0 hidden lg:block">
-          <div className="sticky top-6 h-[calc(100vh-3rem)]">
-            <div className="h-full flex flex-col blueprint-border bg-card">
-              {/* 面板头部 */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
-                <Link2 className="h-4 w-4 text-primary" />
-                <h2 className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Links</h2>
-              </div>
-              {/* 可滚动的内容区域 */}
-              <div className="flex-1 overflow-y-auto px-4 py-4">
-                <LinksPanel docSlug={slug} docTitle={docInfo.title} />
-              </div>
-            </div>
+          {/* 章节标签 */}
+          <div className="relative flex items-center gap-3 mb-4">
+            <span className="tag">{docInfo.chapter}</span>
           </div>
-        </aside>
+
+          {/* 标题 */}
+          <h1 className="relative text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-tight">
+            {docInfo.title}
+          </h1>
+
+          {/* 元数据标签 */}
+          {docContent?.metadata && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {docContent.metadata.tags?.map((tag: string) => (
+                <span key={tag} className="px-2 py-1 font-mono text-xs border border-border text-muted-foreground">
+                  {tag}
+                </span>
+              ))}
+              {docContent.metadata.star && (
+                <span className="px-2 py-1 font-mono text-xs bg-primary/10 text-primary border border-primary/20">
+                  {docContent.metadata.star}
+                </span>
+              )}
+            </div>
+          )}
+        </header>
+
+        {/* 内容区域 */}
+        <article className="relative">
+          {docContent ? (
+            <MarkdownContent content={docContent.content} />
+          ) : (
+            <div className="blueprint-border p-8 text-center">
+              <p className="text-lg text-muted-foreground mb-2 font-mono">
+                CONTENT LOADING...
+              </p>
+              <p className="text-sm text-muted-foreground">
+                无法找到对应的 Markdown 文件
+              </p>
+            </div>
+          )}
+        </article>
       </div>
+
+      {/* 右侧垂直导航栏 - 贴着内容右侧20px */}
+      <nav className="fixed left-[calc(50%+28rem+180px)] top-1/2 -translate-y-1/2 flex flex-col gap-3 z-10">
+        {prev && (
+          <Link href={prev.href}>
+            <Button
+              variant="outline"
+              className="flex flex-col items-center gap-3 px-3 py-4 h-auto w-[60px] btn-press hover:border-primary/50 hover:bg-primary/5 transition-all"
+            >
+              <ArrowUp className="h-5 w-5 flex-shrink-0" />
+              <span className="text-xs text-center leading-tight line-clamp-3" style={{ writingMode: 'vertical-rl' }}>{prev.title}</span>
+            </Button>
+          </Link>
+        )}
+        {next && (
+          <Link href={next.href}>
+            <Button
+              variant="outline"
+              className="flex flex-col items-center gap-3 px-3 py-4 h-auto w-[60px] btn-press hover:border-primary/50 hover:bg-primary/5 transition-all"
+            >
+              <ArrowDown className="h-5 w-5 flex-shrink-0" />
+              <span className="text-xs text-center leading-tight line-clamp-3" style={{ writingMode: 'vertical-rl' }}>{next.title}</span>
+            </Button>
+          </Link>
+        )}
+      </nav>
     </div>
   )
 }
