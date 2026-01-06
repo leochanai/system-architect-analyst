@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, JetBrains_Mono, ZCOOL_XiaoWei } from "next/font/google";
+import { Geist, Geist_Mono, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
 import "./globals.css";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { ReadingProgress } from "@/components/reading-progress";
@@ -20,10 +20,10 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600", "700"],
 });
 
-// ZCOOL XiaoWei - 中文标题字体 (从 Google Fonts 加载)
-const zcoolXiaoWei = ZCOOL_XiaoWei({
-  variable: "--font-zcool",
-  weight: "400",
+// Noto Sans SC - 思源黑体，更适合正文和标题阅读
+const notoSansSC = Noto_Sans_SC({
+  variable: "--font-noto-sc",
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -42,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} ${zcoolXiaoWei.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} ${notoSansSC.variable} antialiased`}
       >
         <ReadingProgress />
         <div className="flex h-screen">
